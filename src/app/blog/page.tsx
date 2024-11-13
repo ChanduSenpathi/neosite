@@ -3,14 +3,17 @@
 import axios from "axios";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addItem } from "../store";
 
-interface Product {
+export interface Product {
     id: number,
     title: string,
     description: string,
-    price: number
+    price: number,
+    thumbnail: string,
+    quantity: number,
+    amount : number
 }
 
 const Blog = () => {
@@ -41,7 +44,7 @@ const Blog = () => {
         <section className="px-3 text-white">
             <ul className="grid grid-cols-4 list-none gap-3">
                 {products.length !== 0 && (
-                    products.map((items:any,index:number) => (
+                    products.map((items:Product) => (
                         <li key={items.id} className="border-2 border-gray-300 p-5 flex flex-col justify-between">
                             <Image className="w-full" width={100} height={100} src={items.thumbnail} alt={items.title}/>
                             <h2>{items.title}</h2>

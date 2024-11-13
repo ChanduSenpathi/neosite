@@ -1,19 +1,24 @@
 
-import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { stat } from "fs";
+import { configureStore, createSlice } from "@reduxjs/toolkit";
 
-interface cartType {
+
+interface Product {
     id: number,
-    name: string,
+    title: string,
     price: number,
     thumbnail: string,
     quantity: number,
     amount : number
 }
 
-type cartState = {
-    cart: any,
+export type cartState = {
+    cart: Product[],
     total: number
+}
+
+type actionType = {
+    type: string,
+    payload: Product
 }
 
 const initialState:cartState = {
@@ -22,22 +27,17 @@ const initialState:cartState = {
 }
 
 
-type actions = {
-    type: string,
-    payload: any
-}
-
 const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
-        addItem: (state, action: PayloadAction<any>) => {
+        addItem: (state, action: actionType) => {
             if(state.cart.length >0){
                 state.total = 0;
-                let existingItem = state.cart.find((item: cartType) => item.id === action.payload.id)
+                const existingItem = state.cart.find((item: Product) => item.id === action.payload.id)
                 if(!existingItem){
                     state.cart.push(action.payload);
-                    state.cart.forEach((items:cartType)=>{
+                    state.cart.forEach((items:Product)=>{
                         items.quantity = 1;
                         items.amount = items.price
                         state.total += items.amount;
@@ -45,7 +45,7 @@ const cartSlice = createSlice({
                 }
             }else {
                 state.cart.push(action.payload);
-                state.cart.forEach((items:cartType)=>{
+                state.cart.forEach((items:Product)=>{
                     if(!items.quantity){
                         items.quantity = 1;
                         items.amount = items.price
@@ -54,24 +54,24 @@ const cartSlice = createSlice({
                 })
             }
           },
-        increaseQuantity: (state, action:PayloadAction<any>)=>{
-            const item = state.cart.find((item: cartType) => item.id === action.payload.id);
+        increaseQuantity: (state, action: actionType)=>{
+            const item = state.cart.find((item: Product) => item.id === action.payload.id);
             if(item){
                 item.quantity += 1;   
                 item.amount = item.quantity * item.price
                 state.total += item.price;             
             }
         },
-        decreaseQuantity: (state, action:PayloadAction<any>)=>{
-            const item = state.cart.find((item: cartType) => item.id === action.payload.id);
+        decreaseQuantity: (state, action: actionType)=>{
+            const item = state.cart.find((item: Product) => item.id === action.payload.id);
             if(item && item.quantity !==1){
                 item.quantity -= 1;
                 item.amount = item.quantity * item.price
                 state.total -= item.price;
             }
         },
-        deleteItem: (state, action:PayloadAction<any>) => {
-            let filterData = state.cart.filter((item: cartType)=> {
+        deleteItem: (state, action: actionType) => {
+            const filterData = state.cart.filter((item: Product)=> {
                 if(item.id !== action.payload.id){
                     return item;
                 }else {                    

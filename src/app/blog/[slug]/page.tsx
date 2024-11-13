@@ -1,13 +1,13 @@
-interface  blogParam {
-    params : {
-        id: string
-    }
-}
+// interface  blogParam {
+//     params : {
+//         id: string
+//     }
+// }
 
-const BlogId = ({params}:blogParam) => {
+const BlogId = () => {
     return (
         <div>
-            Blog id {params.id}
+            Blog page nested
         </div>
     );
 }

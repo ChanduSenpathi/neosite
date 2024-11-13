@@ -1,8 +1,7 @@
 import Image from "next/image";
 import contact from '../../../public/images/contact.png'
 
-const Contact = () => {
-    
+const Contact = () => {    
     return (
         <section className="flex justify-center items-center gap-5 px-3">
             <div className="contact-us-image hidden md:block">
