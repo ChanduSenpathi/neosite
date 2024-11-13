@@ -3,13 +3,12 @@
   "homepage": " https://ChanduSenapathi.github.io/neosite",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
+    "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "export": "next export",
+    "predeploy": "next build && next export",
+    "deploy": "gh-pages -d out"
   },
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
