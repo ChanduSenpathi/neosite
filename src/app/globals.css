@@ -2,20 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+.main-container {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+
+.contact-us-image, .about-image {
+  max-width: 550px;
+  width: 550px;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.common-form-inputs {
+  max-width: 500px;
+  width: 400px;
 }
+.common-form-inputs > label {
+  color: white;
+}
+
+
