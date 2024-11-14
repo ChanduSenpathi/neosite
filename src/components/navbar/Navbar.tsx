@@ -76,7 +76,7 @@ const Navbar = () => {
         <>
             <nav style={setNavBg} className="p-[10px] flex justify-between items-center sticky top-0 left-0 w-full nav-container">
             <a href="#">
-                <Image className="w-[100px] h-[67px]" width={500} height={500} src="/images/logo.png" alt="logo" />
+                <Image className="w-[100px] h-[67px]" width={500} height={500} src="/images/logo.png" alt="logo" unoptimized/>
             </a>
             <ul className="list-none flex justify-between items-center gap-5 text-[white]">
                 {navLinks.map(item=>
@@ -86,7 +86,7 @@ const Navbar = () => {
                     <>
                         {isAdmin && <Link href="/admin" className={`${pathName === '/admin' ? "nav-active" : ""}`}>Admin</Link>}
                         <button type='button' className='w-[35px] relative' onClick={() => setShow(true)}>
-                            <Image src="/images/cart.png" width={100} height={100} className='w-full h-full' alt="cart-icon" />
+                            <Image src="/images/cart.png" width={100} height={100} className='w-full h-full' alt="cart-icon" unoptimized/>
                             <span className='cart-span-item'>{cart.length}</span>
                         </button>
                         <button type='button' className='bg-white text-[black] px-3 py-1 rounded-[10px]'>Logout</button>
@@ -97,7 +97,7 @@ const Navbar = () => {
             </ul>
             <div className='cart-popup' style={toggleCart}>
             <button type='button' className='absolute right-[10px] top-[10px]' onClick={() => setShow(false)}>
-                <Image src="/images/close.png" width={15} height={15} alt='close-icons'/>
+                <Image src="/images/close.png" width={15} height={15} alt='close-icons' unoptimized/>
             </button>
                 {cart.length !== 0 ? (
                     <ul className='list-none p-4'>
@@ -106,7 +106,7 @@ const Navbar = () => {
                             <li key={item.id} className='py-2'>
                                 <div className='flex justify-between items-center'>
                                     <div className='flex items-center'>
-                                        <Image className="w-[100px] h-[100px]" width={100} height={100} src={item.thumbnail} alt={item.title}/>
+                                        <Image className="w-[100px] h-[100px]" width={100} height={100} src={item.thumbnail} alt={item.title} unoptimized/>
                                         <div>
                                             <h5>{item.title}</h5>
                                             <span>Quantity</span>
@@ -119,7 +119,7 @@ const Navbar = () => {
                                     </div>
                                     <div className='flex gap-3'>
                                         <button type='button' onClick={() => dispatch(deleteItem(item))}>
-                                            <Image className='w-full h-full' width={15} height={15} src='/images/delete.png' alt='delete-item'/>
+                                            <Image className='w-full h-full' width={15} height={15} src='/images/delete.png' alt='delete-item' unoptimized/>
                                         </button>
                                     <span>Rs: {item.amount}</span>
                                     </div>

@@ -46,7 +46,7 @@ const Blog = () => {
                 {products.length !== 0 && (
                     products.map((items:Product) => (
                         <li key={items.id} className="border-2 border-gray-300 p-5 flex flex-col justify-between">
-                            <Image className="w-full" width={500} height={500} src={items.thumbnail} alt={items.title}/>
+                            <Image className="w-full" width={500} height={500} src={items.thumbnail} alt={items.title} unoptimized/>
                             <h2>{items.title}</h2>
                             <p>
                                 {

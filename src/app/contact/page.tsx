@@ -5,7 +5,7 @@ const Contact = () => {
     return (
         <section className="flex justify-center items-center gap-5 px-3">
             <div className="contact-us-image hidden md:block">
-                <Image className="w-full h-full" src="/images/contact.png" width={500} height={500} alt="contact us" />
+                <Image className="w-full h-full" src="/images/contact.png" width={500} height={500} alt="contact us" unoptimized/>
             </div>
             <form action="">
                 <div className="common-form-inputs my-2">

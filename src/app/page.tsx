@@ -14,7 +14,7 @@ const Home = () => {
         </div>
       </div>
       <div className="max-w-[600px] h-[500px]">
-        <Image className="w-full h-full" width={100} height={100} src="https://media2.giphy.com/media/XJdXI49B41einJHGLG/source.gif" alt="home"/>
+        <Image className="w-full h-full" width={100} height={100} src="https://media2.giphy.com/media/XJdXI49B41einJHGLG/source.gif" alt="home" unoptimized/>
       </div>
     </section>
   );

@@ -28,7 +28,7 @@ const About = () => {
                 </div>
             </div>
             <div className="max-w-[700px] w-[700px] grow">
-                <Image src="/images/about.png" width={500} height={500} className="w-full h-full hidden md:block" alt="about"/>
+                <Image src="/images/about.png" width={500} height={500} className="w-full h-full hidden md:block" alt="about" unoptimized/>
             </div>
         </section>
     );
