@@ -45,7 +45,7 @@ a.nav-active::before {
     top: -500%;
     width: 500px;
     min-height: 10px;
-    max-height: 300px;
+    max-height: 400px;
     overflow: auto;
     background-color: white;
     border-bottom-left-radius: 10px;

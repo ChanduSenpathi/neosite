@@ -40,7 +40,6 @@ const navLinks = [
 
 const Navbar = () => {
     const pathName = usePathname();
-    // const {cart, total} = useSelector((state: cartState) => state.cart)
     const {cart, total} = useSelector((state: { cart: { cart: Product[], total: number } }) => state.cart)
     const dispatch = useDispatch();
     const [isShow,  setShow] = useState(false);
@@ -56,7 +55,6 @@ const Navbar = () => {
                 setNav(false);
             }
         };
-
         window.addEventListener('scroll', handleScroll);
 
         return () => window.removeEventListener('scroll', handleScroll);
@@ -67,11 +65,20 @@ const Navbar = () => {
         top: isShow? '87px' : '-500%',
         opacity: isShow? '1' : '0',
         transition: 'all 0.3s ease-in-out',
+        backgroundColor: 'rgb(31, 41, 56)',
+        border : '1px solid white'
     }
 
     const setNavBg = {
         backgroundColor: isNav ? 'rgb(31, 41, 56)' : ''
     }
+
+    const setPaths = (id:number) => {
+        if(id !==3){
+            setShow(false)
+        }
+    }
+
     return (
         <>
             <nav style={setNavBg} className="p-[10px] flex justify-between items-center sticky top-0 left-0 w-full nav-container">
@@ -80,11 +87,11 @@ const Navbar = () => {
             </a>
             <ul className="list-none flex justify-between items-center gap-5 text-[white]">
                 {navLinks.map(item=>
-                    <li key={item.id}><Link href={item.path} className={`${pathName === item.path ? "nav-active" : ""} text-[white] fw-bold`}>{item.name}</Link></li>
+                    <li key={item.id}><Link href={item.path} onClick={() => setPaths(item.id)} className={`${pathName === item.path ? "nav-active" : ""} text-[white] fw-bold`}>{item.name}</Link></li>
                 )}
                 {session ? (
                     <>
-                        {isAdmin && <Link href="/admin" className={`${pathName === '/admin' ? "nav-active" : ""}`}>Admin</Link>}
+                        {/* {isAdmin && <Link href="/admin" className={`${pathName === '/admin' ? "nav-active" : ""}`}>Admin</Link>} */}
                         <button type='button' className='w-[35px] relative' onClick={() => setShow(true)}>
                             <Image src="/images/cart.png" width={100} height={100} className='w-full h-full' alt="cart-icon" unoptimized/>
                             <span className='cart-span-item'>{cart.length}</span>
@@ -103,11 +110,11 @@ const Navbar = () => {
                     <ul className='list-none p-4'>
                     {cart.length >0 && (
                         cart.map((item:Product)=>
-                            <li key={item.id} className='py-2'>
+                            <li key={item.id} className='py-2 text-white'>
                                 <div className='flex justify-between items-center'>
                                     <div className='flex items-center'>
                                         <Image className="w-[100px] h-[100px]" width={100} height={100} src={item.thumbnail} alt={item.title} unoptimized/>
-                                        <div>
+                                        <div className='ms-2'>
                                             <h5>{item.title}</h5>
                                             <span>Quantity</span>
                                             <div className='flex gap-2'>
@@ -121,7 +128,7 @@ const Navbar = () => {
                                         <button type='button' className='w-[20px] h-[25px]' onClick={() => dispatch(deleteItem(item))}>
                                             <Image className='w-full h-full' width={500} height={500} src='/images/delete.png' alt='delete-item' unoptimized/>
                                         </button>
-                                    <span>Rs: {item.amount.toFixed(2)}</span>
+                                        <span>Rs: {item.amount.toFixed(2)}</span>
                                     </div>
                                 </div>
                             </li>
@@ -129,15 +136,14 @@ const Navbar = () => {
                     )}
                 </ul>
                 ) : (
-                    <h3 className='text-center p-4 font-bold text-[24px]'>No items Added</h3>
+                    <h3 className='text-center text-white p-4 font-bold text-[24px]'>No items Added</h3>
                 )}
                 <div className='flex justify-between items-center p-3 bg-green-100 sticky bottom-0'>
                     <span>Total</span>
                     <span>Rs: {total.toFixed(2)}</span>
                 </div>
             </div>
-            </nav>
-            
+            </nav>            
         </> 
     );
 }

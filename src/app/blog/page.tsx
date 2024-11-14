@@ -5,6 +5,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addItem } from "../store";
+import Loader from "@/components/loader/Loader";
 
 export interface Product {
     id: number,
@@ -42,7 +43,10 @@ const Blog = () => {
 
     return (
         <section className="px-3 text-white">
-            <ul className="grid grid-cols-4 list-none gap-3">
+            {products.length === 0 ? (
+                <Loader/>
+            ) : (
+                <ul className="grid grid-cols-4 list-none gap-3">
                 {products.length !== 0 && (
                     products.map((items:Product) => (
                         <li key={items.id} className="border-2 border-gray-300 p-5 flex flex-col justify-between">
@@ -69,6 +73,8 @@ const Blog = () => {
                     ))
                 )}
             </ul>
+            )}
+            
         </section>
     );
 }
