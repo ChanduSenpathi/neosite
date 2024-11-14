@@ -118,8 +118,8 @@ const Navbar = () => {
                                         </div>
                                     </div>
                                     <div className='flex gap-3'>
-                                        <button type='button' onClick={() => dispatch(deleteItem(item))}>
-                                            <Image className='w-full h-full' width={15} height={15} src='/images/delete.png' alt='delete-item' unoptimized/>
+                                        <button type='button' className='w-[20px] h-[25px]' onClick={() => dispatch(deleteItem(item))}>
+                                            <Image className='w-full h-full' width={500} height={500} src='/images/delete.png' alt='delete-item' unoptimized/>
                                         </button>
                                     <span>Rs: {item.amount}</span>
                                     </div>
