@@ -1,5 +1,5 @@
 import Image from "next/image";
-import about from '../../../public/images/about.png'
+// import about from '../../../public/images/about.png'
 
 const About = () => {
     return (
@@ -28,7 +28,7 @@ const About = () => {
                 </div>
             </div>
             <div className="max-w-[700px] w-[700px] grow">
-                <Image src={about} className="w-full h-full hidden md:block" alt="about"/>
+                <Image src="/images/about.png" width={500} height={500} className="w-full h-full hidden md:block" alt="about"/>
             </div>
         </section>
     );

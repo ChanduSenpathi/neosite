@@ -7,11 +7,11 @@ import { usePathname } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { decreaseQuantity, deleteItem, increaseQuantity } from '@/app/store';
 import { useEffect, useState } from 'react';
-import close from '../../../public/images/close.png'
-import deleteBtn from '../../../public/images/delete.png'
+// import close from '../../../public/images/close.png'
+// import deleteBtn from '../../../public/images/delete.png'
 import { Product } from '@/app/blog/page';
-import logo from "../../../public/images/logo.png"
-import cartBtn from '../../../public/images/cart.png'
+// import logo from "../../../public/images/logo.png"
+// import cartBtn from '../../../public/images/cart.png'
 
 
 const navLinks = [
@@ -76,7 +76,7 @@ const Navbar = () => {
         <>
             <nav style={setNavBg} className="p-[10px] flex justify-between items-center sticky top-0 left-0 w-full nav-container">
             <a href="#">
-                <Image className="w-[100px] h-[67px]" src={logo} alt="logo" />
+                <Image className="w-[100px] h-[67px]" width={500} height={500} src="/images/logo.png" alt="logo" />
             </a>
             <ul className="list-none flex justify-between items-center gap-5 text-[white]">
                 {navLinks.map(item=>
@@ -86,7 +86,7 @@ const Navbar = () => {
                     <>
                         {isAdmin && <Link href="/admin" className={`${pathName === '/admin' ? "nav-active" : ""}`}>Admin</Link>}
                         <button type='button' className='w-[35px] relative' onClick={() => setShow(true)}>
-                            <Image src={cartBtn} className='w-full h-full' alt="cart-icon" />
+                            <Image src="/images/cart.png" width={100} height={100} className='w-full h-full' alt="cart-icon" />
                             <span className='cart-span-item'>{cart.length}</span>
                         </button>
                         <button type='button' className='bg-white text-[black] px-3 py-1 rounded-[10px]'>Logout</button>
@@ -97,7 +97,7 @@ const Navbar = () => {
             </ul>
             <div className='cart-popup' style={toggleCart}>
             <button type='button' className='absolute right-[10px] top-[10px]' onClick={() => setShow(false)}>
-                <Image src={close} width={15} height={15} alt='close-icons'/>
+                <Image src="/images/close.png" width={15} height={15} alt='close-icons'/>
             </button>
                 {cart.length !== 0 ? (
                     <ul className='list-none p-4'>
@@ -119,7 +119,7 @@ const Navbar = () => {
                                     </div>
                                     <div className='flex gap-3'>
                                         <button type='button' onClick={() => dispatch(deleteItem(item))}>
-                                            <Image className='w-full h-full' width={15} height={15} src={deleteBtn} alt='delete-item'/>
+                                            <Image className='w-full h-full' width={15} height={15} src='/images/delete.png' alt='delete-item'/>
                                         </button>
                                     <span>Rs: {item.amount}</span>
                                     </div>
