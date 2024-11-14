@@ -121,7 +121,7 @@ const Navbar = () => {
                                         <button type='button' className='w-[20px] h-[25px]' onClick={() => dispatch(deleteItem(item))}>
                                             <Image className='w-full h-full' width={500} height={500} src='/images/delete.png' alt='delete-item' unoptimized/>
                                         </button>
-                                    <span>Rs: {item.amount}</span>
+                                    <span>Rs: {item.amount.toFixed(2)}</span>
                                     </div>
                                 </div>
                             </li>
