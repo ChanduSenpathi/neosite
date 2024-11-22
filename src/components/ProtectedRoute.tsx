@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React, {  ReactNode, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { addCart, setAuth } from '@/app/store';
@@ -14,6 +14,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({children}) => {
 
     const router = useRouter();
     const dispatch = useDispatch();
+    const pathName = usePathname()
 
     useEffect(() => {
         const useExisted: string | null = localStorage.getItem('currentUser');
@@ -24,14 +25,13 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({children}) => {
                 if (items.isLogged) {
                     dispatch(addCart(items.cart));
                     dispatch(setAuth({ isTrue: true, user: useExisted ?? '' }));    
+                    router.push(pathName);
                     return            
                 }
             });
         }
         if(!useExisted){
             router.push('/login');
-        }else {
-            router.push('/');
         }
     }, [router, dispatch]);
   return (
