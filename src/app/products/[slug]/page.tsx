@@ -1,13 +1,11 @@
-
 import { API_URL } from "@/lib/api";
 import ProductDetails from "./ProductDetails";
 import Loader from "@/components/loader/Loader";
 
-
-interface productDetailsPageProps {
+interface ProductDetailsPageProps {
   params: {
-    slug: string
-  }
+    slug: string;
+  };
 }
 
 export async function generateStaticParams() {
@@ -24,23 +22,20 @@ export async function generateStaticParams() {
   }));
 }
 
-
-
-const ProductDetailPage = async ({ params }: productDetailsPageProps) => {
+const ProductDetailPage = async ({ params }: ProductDetailsPageProps) => {
   const { slug } = params;
 
   const product = await fetch(`${API_URL}/${slug}`)
-  .then((res) => {
-    if (!res.ok) {
-      throw new Error("Failed to fetch product");
-    }
-    return res.json();
-  })
-  .catch((error) => {
-    console.error("Error fetching product:", error);
-    return null;
-  });
-
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("Failed to fetch product");
+      }
+      return res.json();
+    })
+    .catch((error) => {
+      console.error("Error fetching product:", error);
+      return null;
+    });
 
   if (!product || !product.id) {
     return <Loader />;
@@ -54,4 +49,3 @@ const ProductDetailPage = async ({ params }: productDetailsPageProps) => {
 };
 
 export default ProductDetailPage;
-
