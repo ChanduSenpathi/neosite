@@ -33,7 +33,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({children}) => {
         if(!useExisted){
             router.push('/login');
         }
-    }, [router, dispatch]);
+    }, [router, dispatch, pathName]);
   return (
     <div>{children}</div>
   )
