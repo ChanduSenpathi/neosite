@@ -1,6 +1,6 @@
 import React from "react";
 
-const Footer = React.memo(() => {
+export default React.memo(function Footer(){
     return (
         <div className="flex justify-between items-center text-[white] px-3 my-5">
             <span>Chandu Senapathi</span>
@@ -8,5 +8,3 @@ const Footer = React.memo(() => {
         </div>
     );
 })
-
-export default Footer;

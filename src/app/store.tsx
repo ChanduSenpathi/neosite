@@ -1,6 +1,5 @@
 
 import { configureStore, createSlice } from "@reduxjs/toolkit";
-import { productReview } from "./products/[slug]/page";
 import { Product } from "./products/page";
 import { auth } from "./(auth)/login/page";
 
@@ -78,10 +77,10 @@ const cartSlice = createSlice({
                     state.total += items.price;
                 })
             }
-            let storageItems: string | null = localStorage.getItem('userDetails');
+            const storageItems: string | null = localStorage.getItem('userDetails');
             if(storageItems !== null){
-                let arrayOfItem = JSON.parse(storageItems)
-                let mappedData = arrayOfItem.map((items: auth)=>{
+                const arrayOfItem = JSON.parse(storageItems)
+                const mappedData = arrayOfItem.map((items: auth)=>{
                     if(items.isLogged){
                         return {...items, cart: state.cart, total: state.total.toFixed(2)}
                     }
@@ -97,10 +96,10 @@ const cartSlice = createSlice({
                     item.quantity += 1;
                     item.amount = item.quantity * item.price
                     state.total += item.price;
-                    let storageItems: string | null = localStorage.getItem('userDetails');
+                    const storageItems: string | null = localStorage.getItem('userDetails');
                     if(storageItems !== null){
-                        let arrayOfItem = JSON.parse(storageItems)
-                        let mappedData = arrayOfItem.map((items: auth)=>{
+                        const arrayOfItem = JSON.parse(storageItems)
+                        const mappedData = arrayOfItem.map((items: auth)=>{
                             if(items.isLogged){
                                 return {...items, cart: state.cart, total: state.total.toFixed(2)}
                             }
@@ -120,10 +119,10 @@ const cartSlice = createSlice({
                 item.quantity -= 1;
                 item.amount = item.quantity * item.price
                 state.total -= item.price;
-                let storageItems: string | null = localStorage.getItem('userDetails');
+                const storageItems: string | null = localStorage.getItem('userDetails');
                 if(storageItems !== null){
-                    let arrayOfItem = JSON.parse(storageItems)
-                    let mappedData = arrayOfItem.map((items: auth)=>{
+                    const arrayOfItem = JSON.parse(storageItems)
+                    const mappedData = arrayOfItem.map((items: auth)=>{
                         if(items.isLogged){
                             return {...items, cart: state.cart, total: state.total.toFixed(2)}
                         }
@@ -149,10 +148,10 @@ const cartSlice = createSlice({
                 state.total = 0;
                 state.cart = [];
             }            
-            let storageItems: string | null = localStorage.getItem('userDetails');
+            const storageItems: string | null = localStorage.getItem('userDetails');
                 if(storageItems !== null){
-                    let arrayOfItem = JSON.parse(storageItems)
-                    let mappedData = arrayOfItem.map((items: auth)=>{
+                    const arrayOfItem = JSON.parse(storageItems)
+                    const mappedData = arrayOfItem.map((items: auth)=>{
                         if(items.isLogged){
                             return {...items, cart: filterData, total: state.total.toFixed(2)}
                         }

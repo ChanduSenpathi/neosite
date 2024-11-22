@@ -1,12 +1,17 @@
 'use client'
 
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Loader from "@/components/loader/Loader";
 import ProductItem from "@/components/ProductItem";
 import { useRouter } from "next/navigation";
 import getAllProducts from "@/lib/api";
-import { productReview } from "./[slug]/page";
+
+interface productReview {
+    comment: string,
+    rating: number,
+    reviewerEmail: string
+    reviewerName : string
+}
 
 export interface Product {
     id: number,
@@ -41,12 +46,13 @@ const Blog = () => {
     const router = useRouter()
      
     
-    useEffect(()=>{-
-        (async () => {
+    useEffect(()=>{
+        const fetchData = async () => {
             const data = await getAllProducts();
             setLoadedData(data);
             setProducts(data); 
-        })();
+        }
+        fetchData();
     },[])
 
    
@@ -56,7 +62,7 @@ const Blog = () => {
         }else {
             setProducts(loadedData);
         }
-    },[checkCategory])
+    },[checkCategory, loadedData])
 
     const handleSubString = (id:number) => {
         if(id === isId) {
@@ -67,9 +73,9 @@ const Blog = () => {
     }
     
     const getCheckboxData = (item1: string) => {        
-        let filteredData =  loadedData.filter((items: Product)=> {
+        const filteredData =  loadedData.filter((items: Product)=> {
             if(items.category === item1){
-                let data =products.map((existed) =>{
+                const data =products.map((existed) =>{
                     if(existed.id !== items.id){
                         return items
                     }
@@ -81,13 +87,17 @@ const Blog = () => {
     }
 
     const handleDummyData = (item: string) => {
-        let filteredData = checkCategory.filter((items: Product)=> items.category !== item);
+        const filteredData = checkCategory.filter((items: Product)=> items.category !== item);
         setCheckCategory(filteredData)
     }
 
     const handleCheckbox = (event: React.FormEvent<HTMLInputElement>, type: string) => {
-        let isChecked = (event.target as HTMLInputElement).checked;    
-        isChecked && type  ? getCheckboxData(type) : handleDummyData(type)     
+        const isChecked = (event.target as HTMLInputElement).checked;    
+        if(isChecked && type){
+            getCheckboxData(type);
+        }else {
+            handleDummyData(type);
+        }
     }
 
     const changeCheckBox = () => {
@@ -101,18 +111,18 @@ const Blog = () => {
     }
 
     const getTotalProducts = (category: string) => {
-        let filteredData = loadedData.filter((items: Product)=> items.category === category);
+        const filteredData = loadedData.filter((items: Product)=> items.category === category);
         return filteredData.length;
     }
 
     const handleRangeValues = (event: React.FormEvent<HTMLInputElement>) => {
-        let minPrice = parseInt((event.target as HTMLInputElement).value);
-        let filteredData = loadedData.filter((items: Product)=> items.price >= minPrice);
+        const minPrice = parseInt((event.target as HTMLInputElement).value);
+        const filteredData = loadedData.filter((items: Product)=> items.price >= minPrice);
         setProducts(filteredData)
         setRange(minPrice)
     }
 
-    const handleProductClick = (productId: number, title: string) => {
+    const handleProductClick = (productId: number) => {
         // const slug = generateSlug(title, productId);
         router.push(`/products/${productId}`);
     };
@@ -163,7 +173,7 @@ const Blog = () => {
                     <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  list-none gap-3">
                     {products.length !== 0 && (
                         products.map((items:Product) => (
-                            <ProductItem  router={() => handleProductClick(items.id, items.title)}
+                            <ProductItem  router={() => handleProductClick(items.id)}
                             key={items.id} items={items} isId={isId} handleSubString={(id: number) => handleSubString(id)}/>
                         ))
                     )}

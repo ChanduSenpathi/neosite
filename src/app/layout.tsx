@@ -6,21 +6,12 @@ import { Provider } from "react-redux";
 import store from "./store";
 import "./globals.css"
 import ProtectedRoute from "@/components/ProtectedRoute";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const route = useRouter();
-  const handleUserLogIn = () =>{
-
-  }
-  const handleUserLogOut = () => {
-    
-  }
   return (
     <html lang="en">
       <body className="bg-gray-800">

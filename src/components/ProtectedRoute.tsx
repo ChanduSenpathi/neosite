@@ -16,8 +16,8 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({children}) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        let useExisted: string | null = localStorage.getItem('currentUser');
-        let getItem: string | null = localStorage.getItem('userDetails');
+        const useExisted: string | null = localStorage.getItem('currentUser');
+        const getItem: string | null = localStorage.getItem('userDetails');
         if (getItem !== null) {
             const listOfUsers = JSON.parse(getItem);
             listOfUsers.forEach((items: auth) => {
@@ -33,7 +33,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({children}) => {
         }else {
             router.push('/');
         }
-    }, [router]);
+    }, [router, dispatch]);
   return (
     <div>{children}</div>
   )

@@ -4,7 +4,7 @@ import { addCart, setAuth } from "@/app/store";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 export interface auth {
     username: string;
@@ -24,14 +24,19 @@ const Login = () => {
 
     const checkBoxHandler = (event: React.FormEvent<HTMLInputElement>,) => {
         const isTrue = (event.target as HTMLInputElement).checked;
-        isTrue ? setShow(isTrue) : setShow(isTrue)
+        
+        if(isTrue) {
+            setShow(isTrue)
+        }else {
+            setShow(isTrue)
+        }
     }
 
     const handleLoginForm = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const {username,  password} = loginDetails;
         if(username && password) {
-            let getItem: string | null = localStorage.getItem('userDetails');
+            const getItem: string | null = localStorage.getItem('userDetails');
             if (getItem !== null) {
                 const listOfUsers = JSON.parse(getItem);
                 listOfUsers.forEach((items: auth)=>{
@@ -58,10 +63,10 @@ const Login = () => {
         event.preventDefault();
         const {username, password, email} = signupDetails;
         if(username && password && email){
-            let getItem: string | null = localStorage.getItem('userDetails');
+            const getItem: string | null = localStorage.getItem('userDetails');
             if (getItem!== null) {
                 const listOfUsers = JSON.parse(getItem);
-                let filteredData =listOfUsers.filter((items: auth)=> items.username === username)
+                const filteredData =listOfUsers.filter((items: auth)=> items.username === username)
                 console.log(filteredData)
                 if(filteredData.length >0){
                     alert('Username already exists. Please choose a different one.');
@@ -119,7 +124,7 @@ const Login = () => {
                                 <label htmlFor="checkId">Show Password</label>
                             </div>
                             <input type="submit" className="mt-5 block w-full py-2 my-2 bg-green-400 rounded-[10px] cursor-pointer" value="Submit" />
-                            <span className="">Don't have Account <button type="button" className="text-blue-500" onClick={formChanger}>Create New</button></span>
+                            <span className="">Don &apos; t have Account <button type="button" className="text-blue-500" onClick={formChanger}>Create New</button></span>
                     </form>
                     <form style={changeForm_2} onSubmit={handleSignupForm} className="form-2 border-slate-50 h-fit max-w-[400px] border-2 border-solid rounded-[20px] p-4 ">
                             <h2 className="text-center text-[40px] font-bold">Signup</h2>

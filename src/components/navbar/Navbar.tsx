@@ -35,7 +35,7 @@ const navLinks = [
 ]
 
 
-const Navbar = React.memo(() => {
+export default React.memo( function Navbar(){
     const pathName = usePathname();
     const {cart, total, isUserLoggedIn, userName} = useSelector((state: { cart: { cart: Product[], total: number, isUserLoggedIn: boolean, userName: string } }) => state.cart)
     const dispatch = useDispatch();
@@ -78,7 +78,7 @@ const Navbar = React.memo(() => {
     }
 
     const logoutHandler  = () => {
-        let getItem: string | null = localStorage.getItem('userDetails');
+        const getItem: string | null = localStorage.getItem('userDetails');
             if (getItem!== null) {
                 const listOfUsers = JSON.parse(getItem);
                 listOfUsers.forEach((items: auth)=>{
@@ -169,5 +169,3 @@ const Navbar = React.memo(() => {
         </> 
     );
 })
-
-export default Navbar;
