@@ -1,3 +1,4 @@
+
 import { API_URL } from "@/lib/api";
 import ProductDetails from "./ProductDetails";
 import Loader from "@/components/loader/Loader";
@@ -13,7 +14,7 @@ export async function generateStaticParams() {
   const products = await response.json();
 
   if (!Array.isArray(products)) {
-    console.error('API did not return an array of products.');
+    console.error("API did not return an array of products.");
     return [];
   }
 
