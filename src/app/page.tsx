@@ -1,4 +1,5 @@
 import Image from "next/image";
+import './globals.css'
 
 const Home = () => {
   return (
@@ -13,7 +14,7 @@ const Home = () => {
           <button type="button" className="px-[20px] py-[10px] bg-white text-black rounded-[10px]">Contact</button>
         </div>
       </div>
-      <div className="max-w-[600px] h-[500px]">
+      <div className="max-w-[600px] h-[500px] hidden md:block">
         <Image className="w-full h-full" width={100} height={100} src="https://media2.giphy.com/media/XJdXI49B41einJHGLG/source.gif" alt="home" unoptimized/>
       </div>
     </section>

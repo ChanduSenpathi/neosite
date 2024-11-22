@@ -1,5 +1,4 @@
 import Image from "next/image";
-// import about from '../../../public/images/about.png'
 
 const About = () => {
     return (
@@ -7,7 +6,7 @@ const About = () => {
             <div className="max-w-[600px] w-full flex flex-col justify-center">
                 <h2 className="text-[20px] text-sky-500 font-extrabold">About Agency</h2>
                 <h3 className="font-bold text-[46px] my-[5px]">We create digital ideas that are bigger, bolder, braver and better</h3>
-                <p className="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque sequi, 
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque sequi, 
                     blanditiis dolorum iusto ipsa eos deleniti ipsum autem animi, officiis 
                     reprehenderit? Doloribus vel animi eius ipsum hic quam consequatur 
                     deleniti.
@@ -27,8 +26,8 @@ const About = () => {
                     </div>
                 </div>
             </div>
-            <div className="max-w-[700px] w-[700px] grow">
-                <Image src="/images/about.png" width={500} height={500} className="w-full h-full hidden md:block" alt="about" unoptimized/>
+            <div className="max-w-[500px] w-full hidden md:block">
+                <Image src="/images/about.png" width={500} height={500} className="w-full h-full " alt="about" unoptimized/>
             </div>
         </section>
     );

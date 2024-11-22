@@ -3,15 +3,12 @@
 import Image from 'next/image';
 import './navbar.css'
 import Link from "next/link";
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
-import { decreaseQuantity, deleteItem, increaseQuantity } from '@/app/store';
-import { useEffect, useState } from 'react';
-// import close from '../../../public/images/close.png'
-// import deleteBtn from '../../../public/images/delete.png'
-import { Product } from '@/app/blog/page';
-// import logo from "../../../public/images/logo.png"
-// import cartBtn from '../../../public/images/cart.png'
+import { decreaseQuantity, deleteItem, setAuth, increaseQuantity, resetState } from '@/app/store';
+import React, { useEffect, useState } from 'react';
+import { Product } from '@/app/products/page';
+import { auth } from '@/app/(auth)/login/page';
 
 
 const navLinks = [
@@ -27,8 +24,8 @@ const navLinks = [
     },
     {
         id: 3,
-        name: 'Blogs',
-        path: '/blog'
+        name: 'Products',
+        path: '/products'
     },
     {
         id: 4,
@@ -38,13 +35,14 @@ const navLinks = [
 ]
 
 
-const Navbar = () => {
+const Navbar = React.memo(() => {
     const pathName = usePathname();
-    const {cart, total} = useSelector((state: { cart: { cart: Product[], total: number } }) => state.cart)
+    const {cart, total, isUserLoggedIn, userName} = useSelector((state: { cart: { cart: Product[], total: number, isUserLoggedIn: boolean, userName: string } }) => state.cart)
     const dispatch = useDispatch();
     const [isShow,  setShow] = useState(false);
     const [isNav, setNav] = useState(false);
-    const isAdmin = true;
+    const router = useRouter();
+    // const isAdmin = true;
     const session = true;
 
     useEffect(() => {
@@ -79,13 +77,33 @@ const Navbar = () => {
         }
     }
 
+    const logoutHandler  = () => {
+        let getItem: string | null = localStorage.getItem('userDetails');
+            if (getItem!== null) {
+                const listOfUsers = JSON.parse(getItem);
+                listOfUsers.forEach((items: auth)=>{
+                    if(items.username === userName){                        
+                        items.isLogged = false;
+                        localStorage.setItem('currentUser', '')                        
+                        localStorage.setItem('userDetails', JSON.stringify(listOfUsers));
+                        router.push('/');
+                    }
+                })
+            }
+        dispatch(setAuth({isTrue: false, user: ''}))
+        dispatch(resetState())
+        setShow(false);
+        router.push('/login')
+    }
+
     return (
         <>
             <nav style={setNavBg} className="p-[10px] flex justify-between items-center sticky top-0 left-0 w-full nav-container">
             <a href="#">
                 <Image className="w-[100px] h-[67px]" width={500} height={500} src="/images/logo.png" alt="logo" unoptimized/>
             </a>
-            <ul className="list-none flex justify-between items-center gap-5 text-[white]">
+            {isUserLoggedIn && (
+                <ul className="list-none flex justify-between items-center gap-5 text-[white]">
                 {navLinks.map(item=>
                     <li key={item.id}><Link href={item.path} onClick={() => setPaths(item.id)} className={`${pathName === item.path ? "nav-active" : ""} text-[white] fw-bold`}>{item.name}</Link></li>
                 )}
@@ -96,12 +114,14 @@ const Navbar = () => {
                             <Image src="/images/cart.png" width={100} height={100} className='w-full h-full' alt="cart-icon" unoptimized/>
                             <span className='cart-span-item'>{cart.length}</span>
                         </button>
-                        <button type='button' className='bg-white text-[black] px-3 py-1 rounded-[10px]'>Logout</button>
+                        <button type='button' onClick={logoutHandler} className='bg-white text-[black] px-3 py-1 rounded-[10px]'>Logout</button>
+                        <span className='font-bold'>Hello {userName}</span>
                     </>
                 ) : (
                     <Link href="/login" className={`${pathName === './login' ? "nav-active" : ""} bg-white text-[black] px-3 py-1 rounded-[10px]`}>Login</Link>
                 ) }
             </ul>
+            )}
             <div className='cart-popup' style={toggleCart}>
             <button type='button' className='absolute right-[10px] top-[10px]' onClick={() => setShow(false)}>
                 <Image src="/images/close.png" width={15} height={15} alt='close-icons' unoptimized/>
@@ -116,11 +136,13 @@ const Navbar = () => {
                                         <Image className="w-[100px] h-[100px]" width={100} height={100} src={item.thumbnail} alt={item.title} unoptimized/>
                                         <div className='ms-2'>
                                             <h5>{item.title}</h5>
-                                            <span>Quantity</span>
-                                            <div className='flex gap-2'>
-                                            <button type='button' onClick={() => dispatch(decreaseQuantity(item))} className='px-2 border-slate-500 border-2 border-solid'>-</button>
-                                                <span>{item.quantity}</span>
-                                            <button type='button' onClick={() => dispatch(increaseQuantity(item))} className='px-2 border-slate-500 border-2 border-solid'>+</button>
+                                            <div className='flex gap-3 items-center my-3'>
+                                                <span>Quantity</span>
+                                                <div>
+                                                <button type='button' onClick={() => dispatch(decreaseQuantity(item))} className='px-2 border-slate-500 border-2 border-solid'>-</button>
+                                                    <span className='mx-2'>{item.quantity}</span>
+                                                <button type='button' onClick={() => dispatch(increaseQuantity(item))} className='px-2 border-slate-500 border-2 border-solid'>+</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -146,6 +168,6 @@ const Navbar = () => {
             </nav>            
         </> 
     );
-}
+})
 
 export default Navbar;

@@ -16,6 +16,7 @@ a.nav-active::before {
 
 .nav-container {
     z-index: 1000000;
+    border-bottom: 1px solid white;
 }
 
 @keyframes fillbar {
