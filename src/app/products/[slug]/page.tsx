@@ -1,49 +1,57 @@
 import { API_URL } from "@/lib/api";
 import ProductDetails from "./ProductDetails";
-import Loader from "@/components/loader/Loader";
 
-interface ProductDetailsPageProps {
-  params: Promise<{ slug: string }>;
-}
 
-export async function generateStaticParams() {
-  const response = await fetch(`${API_URL}`);
-  const products = await response.json();
 
-  if (!Array.isArray(products)) {
-    console.error("API did not return an array of products.");
+export async function generateStaticParams(): Promise<Array<{ slug: string }>> {
+  try {
+    const response = await fetch(`${API_URL}`);
+    const products: { slug: string }[] = await response.json();
+
+    if (!Array.isArray(products)) {
+      console.error("API did not return an array of products.");
+      return [];
+    }
+
+    return products.map((product) => ({
+      slug: product.slug,
+    }));
+  } catch (error) {
+    console.error("Error in generateStaticParams:", error);
     return [];
   }
-
-  return products.map((product: { slug: string }) => ({
-    slug: product.slug,
-  }));
 }
 
-const ProductDetailPage = async ({ params }: ProductDetailsPageProps) => {
-  const { slug } = await params;
+export type PageProps = {
+  params: Promise<{ slug: string }>;
+};
 
-  const product = await fetch(`${API_URL}/${slug}`)
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error("Failed to fetch product");
-      }
-      return res.json();
-    })
-    .catch((error) => {
-      console.error("Error fetching product:", error);
-      return null;
-    });
+const ProductDetailPage = async ({ params }: PageProps) => {
+  // Await the params to resolve the promise
+  const resolvedParams = await params;
 
-  if (!product || !product.id) {
-    return <Loader />;
+  const { slug } = resolvedParams;
+
+  try {
+    const productResponse = await fetch(`${API_URL}/${slug}`);
+    if (!productResponse.ok) {
+      throw new Error("Failed to fetch product");
+    }
+    const product = await productResponse.json();
+
+    if (!product) {
+      return <div>Product not found.</div>;
+    }
+
+    return (
+      <div>
+        <ProductDetails product={product} />
+      </div>
+    );
+  } catch (error) {
+    console.error("Error fetching product details:", error);
+    return <div>Failed to load product details.</div>;
   }
-
-  return (
-    <div>
-      <ProductDetails product={product} />
-    </div>
-  );
 };
 
 export default ProductDetailPage;

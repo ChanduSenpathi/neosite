@@ -54,8 +54,8 @@ export default function ProductDetails({product} : {product : Product}) {
   
     return (
       <section className="text-white px-3">
-        <div className="flex gap-4 justify-center">
-                  <div className="max-w-[500px] h-[100vh] w-full sticky top-[100px]">
+        <div className="flex flex-col md:flex-row gap-4 justify-center">
+                  <div className="max-w-[500px] h-[100vh] w-full md:sticky top-[100px]">
                       <Image width={500} height={500} className="w-full h-full" src={productDetails.images[0]} alt={productDetails.title} unoptimized/>
                   </div>
                   <div>

@@ -1,21 +1,18 @@
-import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  /* config options here */
-  output: 'standalone',
+const nextConfig = {
   images: {
-    remotePatterns:[
+    remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'media2.giphy.com'
+        protocol: "https",
+        hostname: "media2.giphy.com",
       },
       {
-        protocol: 'https',
-        hostname: 'cdn.dummyjson.com'
-      }
-    ]
-  }
+        protocol: "https",
+        hostname: "cdn.dummyjson.com",
+      },
+    ],
+  },
+  output: "standalone",
 };
-
 
 export default nextConfig;
