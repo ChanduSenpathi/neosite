@@ -1,12 +1,9 @@
-
 import { API_URL } from "@/lib/api";
 import ProductDetails from "./ProductDetails";
 import Loader from "@/components/loader/Loader";
 
 interface ProductDetailsPageProps {
-  params: {
-    slug: Promise<{slug: string}>;
-  };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -25,7 +22,6 @@ export async function generateStaticParams() {
 
 const ProductDetailPage = async ({ params }: ProductDetailsPageProps) => {
   const { slug } = await params;
-  
 
   const product = await fetch(`${API_URL}/${slug}`)
     .then((res) => {
