@@ -5,7 +5,7 @@ import Loader from "@/components/loader/Loader";
 
 interface ProductDetailsPageProps {
   params: {
-    slug: string;
+    slug: Promise<{slug: string}>;
   };
 }
 
@@ -24,7 +24,8 @@ export async function generateStaticParams() {
 }
 
 const ProductDetailPage = async ({ params }: ProductDetailsPageProps) => {
-  const { slug } = params;
+  const { slug } = await params;
+  
 
   const product = await fetch(`${API_URL}/${slug}`)
     .then((res) => {
