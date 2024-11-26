@@ -1,12 +1,12 @@
-import { useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
+// import { useRouter } from "next/navigation"
+// import { useEffect, useState } from "react"
 import './loadingindicator.css'
 
 
 
 export default function LoadingIndicator() {
-    const [loading, setLoading] = useState(true);
-    const router = useRouter();
+    // const [loading, setLoading] = useState(true);
+    // const router = useRouter();
 
     // useEffect(() =>{
     //     const handleStart = () => setLoading(false);

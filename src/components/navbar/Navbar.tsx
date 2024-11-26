@@ -6,10 +6,10 @@ import Link from "next/link";
 import { usePathname, useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { decreaseQuantity, deleteItem, setAuth, increaseQuantity, resetState, setPathName } from '@/app/store';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Product } from '@/app/products/page';
 import { auth } from '@/app/(auth)/login/page';
-import LoadingIndicator from '../Loadingindicator/LoadingIndicator';
+// import LoadingIndicator from '../Loadingindicator/LoadingIndicator';
 
 
 const navLinks = [

@@ -1,11 +1,11 @@
 'use client'
 
-import { notFound, usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React, {  ReactNode, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addCart, setAuth } from '@/app/store';
 import { auth } from '@/app/(auth)/login/page';
-import { Product } from '@/app/products/page';
+// import { Product } from '@/app/products/page';
 
 
 interface ProtectedRouteProps {
@@ -39,7 +39,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({children}) => {
         if(!useExisted){
             router.push('/login');
         }
-    }, [router, dispatch]);
+    }, [router, dispatch, pathName]);
   return (
     <div>{children}</div>
   )

@@ -7,11 +7,12 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "export": "next export",
-    "predeploy": "next build && next export",
-    "deploy": "gh-pages -d out"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@netlify/plugin-nextjs": "^5.8.1",
     "@reduxjs/toolkit": "^2.3.0",
     "axios": "^1.7.7",
     "next": "^15.0.3",
