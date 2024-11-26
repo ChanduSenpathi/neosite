@@ -1,0 +1,18 @@
+4:"$Sreact.fragment"
+5:I[4547,[],"ClientSegmentRoot"]
+6:I[2091,["970","static/chunks/970-c03b05de7843c5fb.js","133","static/chunks/133-4b1bf56b22d0daa0.js","463","static/chunks/463-2b6a46e736f1f52c.js","177","static/chunks/app/layout-71d309095bc1d1fe.js"],"default"]
+7:I[5244,[],""]
+8:I[3866,[],""]
+9:I[7970,["970","static/chunks/970-c03b05de7843c5fb.js","974","static/chunks/app/page-3cfadccc43f258e3.js"],"Image"]
+b:I[6213,[],"OutletBoundary"]
+d:I[6213,[],"MetadataBoundary"]
+f:I[6213,[],"ViewportBoundary"]
+11:I[4835,[],""]
+1:HL["/_next/static/css/add63385805c2f0a.css","style"]
+2:HL["/_next/static/css/47fc8b34ce889f1c.css","style"]
+3:HL["/_next/static/css/1a009a1a374f5943.css","style"]
+0:{"P":null,"b":"OeVmvHawVLtHtaXxzhneV","p":"","c":["",""],"i":false,"f":[[["",{"children":["__PAGE__",{}]},"$undefined","$undefined",true],["",["$","$4","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/add63385805c2f0a.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","link","1",{"rel":"stylesheet","href":"/_next/static/css/47fc8b34ce889f1c.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","link","2",{"rel":"stylesheet","href":"/_next/static/css/1a009a1a374f5943.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","$L5",null,{"Component":"$6","slots":{"children":["$","$L7",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L8",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":["$","div",null,{"className":"flex flex-col justify-center items-center h-[100vh] bg-white","children":[["$","$L9",null,{"width":500,"height":500,"src":"https://cdn.svgator.com/images/2024/04/electrocuted-caveman-animation-404-error-page.gif","alt":"not-found"}],["$","h1",null,{"className":"text-[40px] font-bold","children":"404 Not Found"}]]}],"notFoundStyles":[]}]},"params":{},"promise":"$@a"}]]}],{"children":["__PAGE__",["$","$4","c",{"children":[["$","section",null,{"className":"flex justify-center gap-5 px-3 text-[white]","children":[["$","div",null,{"className":"flex flex-col justify-between max-w-[500px]","children":[["$","h1",null,{"className":"text-[60px] max-w-[300px] font-bold mb-[10px]","children":"Creative Thoughts Agency"}],["$","p",null,{"children":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Error debitis, iure corporis animi laboriosam inventore. Perferendis at magni adipisci delectus ex, dolorem, quis assumenda quam voluptas totam accusamus illo consequatur!"}],["$","div",null,{"className":"flex gap-5 my-[20px]","children":[["$","button",null,{"type":"button","className":"px-[20px] py-[10px] bg-blue-800 rounded-[10px]","children":"Learn More"}],["$","button",null,{"type":"button","className":"px-[20px] py-[10px] bg-white text-black rounded-[10px]","children":"Contact"}]]}]]}],["$","div",null,{"className":"max-w-[600px] h-[500px] hidden md:block","children":["$","$L9",null,{"className":"w-full h-full","width":100,"height":100,"src":"https://media2.giphy.com/media/XJdXI49B41einJHGLG/source.gif","alt":"home","unoptimized":true}]}]]}],null,["$","$Lb",null,{"children":"$Lc"}]]}],{},null]},null],["$","$4","h",{"children":[null,["$","$4","4u1kZIjjp3VcJOtXcwuZR",{"children":[["$","$Ld",null,{"children":"$Le"}],["$","$Lf",null,{"children":"$L10"}],null]}]]}]]],"m":"$undefined","G":["$11","$undefined"],"s":false,"S":true}
+a:{}
+10:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+e:[["$","meta","0",{"charSet":"utf-8"}]]
+c:null
