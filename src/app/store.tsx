@@ -10,7 +10,8 @@ export type cartState = {
     cart: Product[],
     total: number,
     isUserLoggedIn: boolean,
-    userName: string
+    userName: string,
+    pathName: string
 }
 
 interface actionObject {
@@ -34,13 +35,19 @@ type cartType = {
     payload: Product []
 }
 
+type pathType = {
+    type:string,
+    payload: string
+}
+
 
 
 const initialState: cartState = {
     userName: '',
     cart: [],
     total: 0,
-    isUserLoggedIn: false
+    isUserLoggedIn: false,
+    pathName: '/'
 }
 
 
@@ -166,11 +173,16 @@ const cartSlice = createSlice({
             state.userName = action.payload.user;
         },
         addCart: (state, action: cartType) =>{
-            state.cart = action.payload;
-            action.payload.forEach((items:Product) =>{
-                items.amount = items.price * items.quantity;
-                state.total += items.amount;
-            })
+            if(action.payload){
+                state.cart = action.payload;
+                action.payload.forEach((items:Product) =>{
+                    items.amount = items.price * items.quantity;
+                    state.total += items.amount;
+                })
+            }
+        },
+        setPathName: (state, action: pathType) => {
+            state.pathName = action.payload;
         },
         resetState: () => initialState
     }
@@ -183,4 +195,4 @@ const store = configureStore({
 })
 
 export default store;
-export const { addItem, increaseQuantity, decreaseQuantity, deleteItem, setAuth, resetState, addCart } = cartSlice.actions;
+export const { addItem, increaseQuantity, decreaseQuantity, deleteItem, setAuth, resetState, addCart, setPathName } = cartSlice.actions;

@@ -27,7 +27,6 @@ export type PageProps = {
 };
 
 const ProductDetailPage = async ({ params }: PageProps) => {
-  // Await the params to resolve the promise
   const resolvedParams = await params;
 
   const { slug } = resolvedParams;

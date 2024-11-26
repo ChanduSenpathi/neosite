@@ -5,10 +5,11 @@ import './navbar.css'
 import Link from "next/link";
 import { usePathname, useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
-import { decreaseQuantity, deleteItem, setAuth, increaseQuantity, resetState } from '@/app/store';
+import { decreaseQuantity, deleteItem, setAuth, increaseQuantity, resetState, setPathName } from '@/app/store';
 import React, { useEffect, useState } from 'react';
 import { Product } from '@/app/products/page';
 import { auth } from '@/app/(auth)/login/page';
+import LoadingIndicator from '../Loadingindicator/LoadingIndicator';
 
 
 const navLinks = [
@@ -40,23 +41,10 @@ export default React.memo( function Navbar(){
     const {cart, total, isUserLoggedIn, userName} = useSelector((state: { cart: { cart: Product[], total: number, isUserLoggedIn: boolean, userName: string } }) => state.cart)
     const dispatch = useDispatch();
     const [isShow,  setShow] = useState(false);
-    const [isNav, setNav] = useState(false);
     const router = useRouter();
     // const isAdmin = true;
     const session = true;
 
-    useEffect(() => {
-        const handleScroll = () => {
-            if (typeof window !== 'undefined' && window.scrollY > 0) {
-                setNav(true);
-            } else {
-                setNav(false);
-            }
-        };
-        window.addEventListener('scroll', handleScroll);
-
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
     
 
     const toggleCart = {
@@ -67,14 +55,23 @@ export default React.memo( function Navbar(){
         border : '1px solid white'
     }
 
-    const setNavBg = {
-        backgroundColor: isNav ? 'rgb(31, 41, 56)' : ''
-    }
-
-    const setPaths = (id:number) => {
+    const setPaths = async (id:number, pathName: string) => {
         if(id !==3){
             setShow(false)
         }
+        dispatch(setPathName(pathName));
+        const getItem: string | null = localStorage.getItem('userDetails');
+        if (getItem !== null) {
+            const listOfUsers = JSON.parse(getItem);
+            const filteredData =listOfUsers.map((items: auth) => {
+                if (items.isLogged) {
+                    items.pathName = pathName;        
+                }
+                return items;
+            });
+            localStorage.setItem('userDetails', JSON.stringify((filteredData)))
+        }
+
     }
 
     const logoutHandler  = () => {
@@ -98,21 +95,21 @@ export default React.memo( function Navbar(){
 
     return (
         <>
-            <nav style={setNavBg} className="p-[10px] flex justify-between items-center sticky top-0 left-0 w-full nav-container">
+            <nav className="p-[10px] flex justify-between items-center sticky top-0 left-0 w-full nav-container">
             <a href="#">
                 <Image className="w-[100px] h-[67px]" width={500} height={500} src="/images/logo.png" alt="logo" unoptimized/>
             </a>
             {isUserLoggedIn && (
                 <ul className="list-none flex justify-between items-center gap-5 text-[white]">
                 {navLinks.map(item=>
-                    <li key={item.id}><Link href={item.path} onClick={() => setPaths(item.id)} className={`${pathName === item.path ? "nav-active" : ""} text-[white] fw-bold`}>{item.name}</Link></li>
+                    <li key={item.id}><Link href={item.path} onClick={() => setPaths(item.id, pathName)} className={`${pathName === item.path ? "nav-active" : ""} text-[white] fw-bold`}>{item.name}</Link></li>
                 )}
                 {session ? (
                     <>
                         {/* {isAdmin && <Link href="/admin" className={`${pathName === '/admin' ? "nav-active" : ""}`}>Admin</Link>} */}
                         <button type='button' className='w-[35px] relative' onClick={() => setShow(true)}>
                             <Image src="/images/cart.png" width={100} height={100} className='w-full h-full' alt="cart-icon" unoptimized/>
-                            <span className='cart-span-item'>{cart.length}</span>
+                            <span className='cart-span-item'>{`${cart ? cart.length : 0}`}</span>
                         </button>
                         <button type='button' onClick={logoutHandler} className='bg-white text-[black] px-3 py-1 rounded-[10px]'>Logout</button>
                         <span className='font-bold'>Hello {userName}</span>

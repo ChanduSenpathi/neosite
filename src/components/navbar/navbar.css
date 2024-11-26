@@ -15,8 +15,9 @@ a.nav-active::before {
 }
 
 .nav-container {
-    z-index: 1000000;
+    z-index: 10000;
     border-bottom: 1px solid white;
+    background-color: rgb(31, 41, 56);
 }
 
 @keyframes fillbar {

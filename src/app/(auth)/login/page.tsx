@@ -11,6 +11,7 @@ export interface auth {
     password: string;
     isLogged: boolean
     cart: Product[]
+    pathName: string
 }
 
 const Login = () => {

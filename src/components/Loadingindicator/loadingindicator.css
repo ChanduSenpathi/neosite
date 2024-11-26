@@ -1,0 +1,19 @@
+.top-progress {
+    position: fixed;
+    top: 0;
+    width: 0px;
+    background-color: red;
+    height: 4px;
+    animation: top-prog .6s linear 1;
+    z-index: 900000;
+}
+
+@keyframes top-prog {
+    0% {
+        width: 0px;
+    }
+    100% {
+        width: 100%;
+    }
+}
+

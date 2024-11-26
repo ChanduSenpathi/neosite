@@ -1,3 +1,4 @@
+import { hostname } from "os";
 
 const nextConfig = {
   images: {
@@ -10,6 +11,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "cdn.dummyjson.com",
       },
+      {
+        protocol: "https",
+        hostname: 'cdn.svgator.com'
+      }
     ],
   },
   output: "standalone",
