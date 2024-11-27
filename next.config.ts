@@ -1,4 +1,4 @@
-import { hostname } from "os";
+
 
 const nextConfig = {
   images: {
@@ -17,7 +17,7 @@ const nextConfig = {
       }
     ],
   },
-  output: "standalone",
+  output: "standalone"
 };
 
 export default nextConfig;
