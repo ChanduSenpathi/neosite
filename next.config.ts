@@ -17,7 +17,8 @@ const nextConfig = {
       }
     ],
   },
-  output: "standalone"
+  output: "standalone",
+  distDir: 'out',
 };
 
 export default nextConfig;
